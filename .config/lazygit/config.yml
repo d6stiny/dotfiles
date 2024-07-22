@@ -1,0 +1,21 @@
+reporting: 'off'
+notARepository: 'skip'
+confirmOnQuit: true
+quitOnTopLevelReturn: false
+gui:
+  scrollHeight: 4 # how many lines you scroll by
+  scrollPastBottom: false # enable scrolling past the bottom
+  commitLength:
+    show: true
+  mouseEvents: true
+  skipDiscardChangeWarning: true
+  showFileTree: true
+  showBottomLine: false
+
+refresher:
+  refreshInterval: 60
+
+git:
+  autoFetch: true
+  pull:
+    mode: 'rebase'

@@ -1,0 +1,50 @@
+[user]
+	name = d6stiny
+	email = 99969901+d6stiny@users.noreply.github.com
+	signingkey = 8CBA62F6F7596C5F
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[commit]
+	gpgsign = true
+[push]
+    default = tracking
+[core]
+    excludesfile = ~/.gitignore
+    pager = delta
+[init]
+	defaultBranch = main
+[alias]
+	update = "pull origin master --rebase"
+	fuckme = "switch --orphan"
+	fuckyou = "push --force"
+    status = "status -s"
+    undo = "reset --soft HEAD^"
+    cleanup = "!f() { \
+        git fetch upstream; \
+        git checkout master; \
+        git pull upstream master; \
+        git push origin master; \
+        git branch -r --merged | grep -v master | grep origin | sed 's/origin\\///' | gxargs -r -n 1 git push --delete origin; \
+        git branch --merged | grep -v master | gxargs -r -n 1 git branch -d; \
+        git branch -vv | grep ': gone]'|  grep -v '\\*' | awk '{ print $1; }' | gxargs -r git branch -D; \
+        git fetch --all --prune; \
+        git prune; \
+        git gc --aggressive; \
+    }; f"
+[submodule]
+	recurse = true
+[rebase]
+    autoStash = true
+[merge]
+    conflictstyle = diff3
+[credential "https://github.com"]
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+    helper = !/opt/homebrew/bin/gh auth git-credential
+[delta]
+    navigate = true
+    side-by-side = true
+    line-numbers = true
